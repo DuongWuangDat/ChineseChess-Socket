@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "@types/node": "^20.12.7",
     "cors": "^2.8.5",
