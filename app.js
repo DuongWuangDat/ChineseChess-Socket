@@ -23,6 +23,7 @@ const io = new Server(http, {
     }
 })
 let onlineUsers = []
+let queueMatch = []
 io.on("connection", (socket)=>{
     console.log(`${socket.id} connected`)
 
@@ -50,6 +51,34 @@ io.on("connection", (socket)=>{
          if(user){
              io.to(user.socketID).emit("getMessage", req)
          }
+     })
+
+     socket.on("findMatch", (req)=>{
+        //{
+        //  min:,
+        //  userID:
+        //}
+        const result = queueMatch.find((user)=> req.min === user.min)
+        if(result){
+           queueMatch = queueMatch.filter((user)=> user.userID !== result.userID)
+           const data = {
+            user1: result,
+            user2: req
+           }
+           io.to(result.socketID).emit("getMatchData", data)
+           io.to(socket.id).emit("getMatchData",data)
+        }
+        else{
+            queueMatch.push({
+                min: req.min,
+                userID: req.userID,
+                socketID: socket.id
+            } )
+        }
+     })
+
+     socket.on("cancelFindMatch", (userID)=>{
+        queueMatch = queueMatch.filter((user)=> user.userID !== userID)
      })
     
     socket.on('disconnect', () => {
