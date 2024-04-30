@@ -91,7 +91,9 @@ io.on("connection", (socket)=>{
     
     socket.on('disconnect', () => {
         onlineUsers = onlineUsers.filter((user)=> user.socketID !== socket.id)
+        queueMatch = queueMatch.filter((user)=> user.socketID !== socket.id)
         io.emit("getOnlineUsers", onlineUsers)
+
     });
 
     //**------------------------------------- */
