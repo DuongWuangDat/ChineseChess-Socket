@@ -84,7 +84,7 @@ io.on("connection", (socket)=>{
         else{
             queueMatch.push({
                 min: req.min,
-                userID: req.user,
+                user: req.user,
                 socketID: socket.id,
                 color: req.color
             } )
