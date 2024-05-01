@@ -65,7 +65,7 @@ io.on("connection", (socket)=>{
             socket.emit("getErrorMatch", "User has aldready find match")
             return;
         }
-        const result = queueMatch.find((user)=> req.min === user.min && req.color === user.color)
+        const result = queueMatch.find((user)=> req.min === user.min && req.color !== user.color)
         if(result){
            queueMatch = queueMatch.filter((user)=> user.userID !== result.userID)
            console.log(queueMatch)
