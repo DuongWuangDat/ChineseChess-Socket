@@ -70,7 +70,11 @@ io.on("connection", (socket)=>{
            console.log(queueMatch)
            const data = {
             user1: result,
-            user2: req
+            user2: {
+                min: req.min,
+                userID: req.userID,
+                socketID: socket.id
+            }
            }
            io.to(result.socketID).emit("getMatchData", data)
            io.to(socket.id).emit("getMatchData",data)
