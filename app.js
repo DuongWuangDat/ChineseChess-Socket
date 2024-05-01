@@ -56,9 +56,10 @@ io.on("connection", (socket)=>{
      socket.on("findMatch", (req)=>{
         //{
         //  min:,
-        //  userID:
+        //  userID:,
+        //  color:,
         //}
-        const check = queueMatch.some((user)=> req.userID === user.userID)
+        const check = queueMatch.some((user)=> req.userID === user.userID && req.color === user.color)
         if(check){
             console.log("Exist user")
             socket.emit("getErrorMatch", "User has aldready find match")
@@ -73,7 +74,8 @@ io.on("connection", (socket)=>{
             user2: {
                 min: req.min,
                 userID: req.userID,
-                socketID: socket.id
+                socketID: socket.id,
+                color: req.color
             }
            }
            io.to(result.socketID).emit("getMatchData", data)
@@ -83,7 +85,8 @@ io.on("connection", (socket)=>{
             queueMatch.push({
                 min: req.min,
                 userID: req.userID,
-                socketID: socket.id
+                socketID: socket.id,
+                color: req.color
             } )
             console.log(queueMatch)
         }
@@ -96,7 +99,7 @@ io.on("connection", (socket)=>{
      socket.on("completeTurn", (res)=>{
         console.log(res.board)
 
-        
+
         io.to(res.socketID).emit("getTurn", res.board)
      })
 
