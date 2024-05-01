@@ -95,8 +95,8 @@ io.on("connection", (socket)=>{
     
      socket.on("completeTurn", (res)=>{
         console.log("I have passed here")
-        console.log(res.socketID)
-        io.to(res.socketID).emit("getTurn", res.board)
+        // console.log(res.socketID)
+        // io.to(res.socketID).emit("getTurn", res.board)
      })
 
     socket.on('disconnect', () => {
