@@ -89,6 +89,11 @@ io.on("connection", (socket)=>{
         queueMatch = queueMatch.filter((user)=> user.userID !== userID)
      })
     
+     socket.on("completeTurn", (res)=>{
+        console.log(board)
+        io.to(res.socketID).emit("getTurn", res.board)
+     })
+
     socket.on('disconnect', () => {
         onlineUsers = onlineUsers.filter((user)=> user.socketID !== socket.id)
         queueMatch = queueMatch.filter((user)=> user.socketID !== socket.id)
