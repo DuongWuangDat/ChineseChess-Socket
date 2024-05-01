@@ -90,7 +90,7 @@ io.on("connection", (socket)=>{
      })
     
      socket.on("completeTurn", (res)=>{
-        console.log(res.board)
+        console.log(res)
         io.to(res.socketID).emit("getTurn", res.board)
      })
 
