@@ -56,10 +56,10 @@ io.on("connection", (socket)=>{
      socket.on("findMatch", (req)=>{
         //{
         //  min:,
-        //  userID:,
+        //  user:,
         //  color:,
         //}
-        const check = queueMatch.some((user)=> req.userID === user.userID )
+        const check = queueMatch.some((user)=> req.user.id === user.user.id )
         if(check){
             console.log("Exist user")
             socket.emit("getErrorMatch", "User has aldready find match")
@@ -67,13 +67,13 @@ io.on("connection", (socket)=>{
         }
         const result = queueMatch.find((user)=> req.min === user.min && req.color !== user.color)
         if(result){
-           queueMatch = queueMatch.filter((user)=> user.userID !== result.userID)
+           queueMatch = queueMatch.filter((user)=> user.user.id !== result.user.id)
            console.log(queueMatch)
            const data = {
             user1: result,
             user2: {
                 min: req.min,
-                userID: req.userID,
+                user: req.user,
                 socketID: socket.id,
                 color: req.color
             }
@@ -84,7 +84,7 @@ io.on("connection", (socket)=>{
         else{
             queueMatch.push({
                 min: req.min,
-                userID: req.userID,
+                userID: req.user,
                 socketID: socket.id,
                 color: req.color
             } )
@@ -93,7 +93,7 @@ io.on("connection", (socket)=>{
      })
 
      socket.on("cancelFindMatch", (userID)=>{
-        queueMatch = queueMatch.filter((user)=> user.userID !== userID)
+        queueMatch = queueMatch.filter((user)=> user.user.id !== userID)
      })
     
      socket.on("completeTurn", (res)=>{
