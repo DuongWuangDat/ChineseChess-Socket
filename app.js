@@ -100,6 +100,10 @@ io.on("connection", (socket)=>{
         io.to(res.socketID).emit("getTurn", res.board)
      })
 
+     socket.on("surrender",(res)=>{
+        io.to(res.socketID).emit("winner",res)
+     })
+
     socket.on('disconnect', () => {
         onlineUsers = onlineUsers.filter((user)=> user.socketID !== socket.id)
         queueMatch = queueMatch.filter((user)=> user.socketID !== socket.id)
