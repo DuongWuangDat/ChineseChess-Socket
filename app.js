@@ -45,12 +45,9 @@ io.on("connection", (socket)=>{
      })
      
      socket.on("sendMessage", (req)=>{
-         console.log(req.recipientID)
-         const user = onlineUsers.find((userFind) => userFind.userID == req.recipientID)
-         console.log(user)
-         if(user){
-             io.to(user.socketID).emit("getMessage", req)
-         }
+        console.log(req.socketId)
+        io.to(req.socketId).emit("getMessage", req)
+         
      })
 
      socket.on("findMatch", (req)=>{
