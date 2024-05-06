@@ -101,6 +101,7 @@ io.on("connection", (socket)=>{
      })
 
      socket.on("surrender",(res)=>{
+        console.log(res.socketID)
         io.to(res.socketID).emit("winner",res)
      })
 
