@@ -23,6 +23,7 @@ const io = new Server(http, {
         origin: "*"
     }
 })
+const baseUrl = "https://se330-o21-chinese-game-be.onrender.com";
 let onlineUsers = []
 let queueMatch = []
 io.on("connection", (socket)=>{
