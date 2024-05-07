@@ -112,8 +112,8 @@ io.on("connection", (socket)=>{
 				url: `${baseUrl}/api/v1/history/create?winScore=10&loseScore=1`,
 				headers: {},
 				data: {
-                    user1Id: req.user1ID,
-                    user2Id: req.user2ID,
+                    user1Id: res.user1ID,
+                    user2Id: res.user2ID,
                     user1Score: 1,
                     user2Score: 0,
 				},
