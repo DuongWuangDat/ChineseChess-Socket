@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const cors = require("cors")
+const axios = require("axios")
 const http = require("http").createServer(app)
 require("dotenv").config()
 const port = process.env.PORT
@@ -102,6 +103,26 @@ io.on("connection", (socket)=>{
 
      socket.on("surrender",(res)=>{
         console.log(res.socketID)
+        const createHistory = async () => {
+			
+			try {
+			const response = await axios({
+				method: "post",
+				url: `${baseUrl}/api/v1/history/create?winScore=10&loseScore=1`,
+				headers: {},
+				data: {
+                    user1Id: req.user1ID,
+                    user2Id: req.user2ID,
+                    user1Score: 1,
+                    user2Score: 0,
+				},
+			});
+			console.log(response);
+			} catch (error) {
+				console.log("Error", error);
+			}
+		};
+		createHistory();
         io.to(res.socketID).emit("winner",res)
      })
 
