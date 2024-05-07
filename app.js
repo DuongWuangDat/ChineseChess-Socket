@@ -104,8 +104,9 @@ io.on("connection", (socket)=>{
 
      socket.on("surrender",(res)=>{
         console.log(res.socketID)
+        console.log(res.user1ID)
+        console.log(res.user2ID)
         const createHistory = async () => {
-			
 			try {
 			const response = await axios({
 				method: "post",
