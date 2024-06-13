@@ -97,16 +97,14 @@ io.on("connection", (socket)=>{
     
      socket.on("completeTurn", (res)=>{
         console.log(res.board)
-        const board = res.board
-        board.array.forEach(element => {
-            
-        });((row)=>{
-            row.reverse()
+       
+        res.board.array.forEach(element => {
+            element.reverse()
         })
 
-        board.reverse()
-        console.log(board)
-        io.to(res.socketID).emit("getTurn", board)
+        res.board.reverse()
+        console.log(res.board)
+        io.to(res.socketID).emit("getTurn", res.board)
      })
 
      socket.on("surrender",(res)=>{
