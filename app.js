@@ -98,7 +98,7 @@ io.on("connection", (socket)=>{
      socket.on("completeTurn", (res)=>{
         console.log(res.board)
        
-        res.board.array.forEach(element => {
+        res.board.forEach(element => {
             element.reverse()
         })
 
