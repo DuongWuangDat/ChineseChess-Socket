@@ -96,14 +96,14 @@ io.on("connection", (socket)=>{
      })
     
      socket.on("completeTurn", (res)=>{
-        console.log(res.board)
+        // console.log(res.board)
        
-        res.board.forEach(element => {
-            element.reverse()
-        })
+        // res.board.forEach(element => {
+        //     element.reverse()
+        // })
 
-        res.board.reverse()
-        console.log(res.board)
+        // res.board.reverse()
+        // console.log(res.board)
         io.to(res.socketID).emit("getTurn", res.board)
      })
 
